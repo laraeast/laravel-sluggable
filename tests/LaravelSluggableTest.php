@@ -70,7 +70,7 @@ class LaravelSluggableTest extends TestCase
     public function it_redirect_to_latest_updated_slug()
     {
         Route::middleware(['web', SluggableRedirectMiddleware::class])->get('posts/{post}', function (Post $post) {
-           return $post->title;
+           return request()->fullUrl();
         })->name('posts.show');
 
         $post = Post::create([
@@ -80,5 +80,15 @@ class LaravelSluggableTest extends TestCase
 
         $this->get(url("posts/{$post->id}"))
             ->assertRedirect(url("posts/{$post->id}-dummy-title"));
+
+        $this->get(route('posts.show', $post))
+            ->assertSuccessful()->assertSee(url("posts/{$post->id}-dummy-title"));
+
+        $post->update(['title' => 'new title']);
+        $this->assertEquals(route('posts.show', $post), url("posts/{$post->id}-new-title"));
+
+
+        $this->get(url("posts/{$post->id}-dummy-title"))
+            ->assertRedirect(url("posts/{$post->id}-new-title"));
     }
 }

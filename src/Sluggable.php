@@ -19,6 +19,19 @@ trait Sluggable
     }
 
     /**
+     * Retrieve the model for a bound value.
+     *
+     * @param  mixed  $value
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
+    public function resolveRouteBinding($value)
+    {
+        $value = explode('-', $value)[0];
+
+        return $this->where($this->getRouteKeyName(), $value)->first();
+    }
+
+    /**
      * The sluggable fields for model.
      *
      * @return array
