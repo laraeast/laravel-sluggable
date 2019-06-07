@@ -13,9 +13,7 @@ trait Sluggable
      */
     public function getRouteKey()
     {
-        $slug = $this->generateSluggable();
-
-        return $this->getAttribute($this->getRouteKeyName()).'-'.$slug;
+        return $this->generateSlug();
     }
 
     /**
@@ -26,7 +24,7 @@ trait Sluggable
      */
     public function resolveRouteBinding($value)
     {
-        $value = explode('-', $value)[0];
+        $value = explode($this->getSeparator(), $value)[0];
 
         return $this->where($this->getRouteKeyName(), $value)->first();
     }
@@ -43,9 +41,9 @@ trait Sluggable
      *
      * @return string
      */
-    public function generateSluggable()
+    public function generateSlug()
     {
-        $separator = Config::get('sluggable.separator', '-');
+        $separator = $this->getSeparator();
 
         $input = [];
 
@@ -67,6 +65,17 @@ trait Sluggable
         $return = trim(preg_replace('/ +/', ' ', preg_replace('/[^a-zA-Z\p{Arabic}0-9\s]/u', '', mb_strtolower($input))));
 
         // Replace space.
-        return str_replace(' ', $separator, $return);
+        $slug = str_replace(' ', $separator, $return);
+
+        return $this->getKey().$separator.$slug;
+    }
+
+    /**
+     * Get the sluggable separator
+     * @return string
+     */
+    protected function getSeparator()
+    {
+        return Config::get('sluggable.separator', '-');
     }
 }
