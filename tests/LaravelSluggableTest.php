@@ -64,6 +64,10 @@ class LaravelSluggableTest extends TestCase
         ]);
 
         $this->assertEquals(route('posts.show', $post), url("posts/{$post->id}-dummy-title"));
+
+        $this->app->make('config')->set(['sluggable.separator' => '_']);
+
+        $this->assertEquals(route('posts.show', $post), url("posts/{$post->id}_dummy_title"));
     }
 
     /** @test */
