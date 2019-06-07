@@ -1,5 +1,21 @@
 # Eloquent-Sluggable
-
+<p align="center">
+	<a href="https://travis-ci.org/laraeast/laravel-sluggable">
+		<img src="https://travis-ci.org/laraeast/laravel-sluggable.svg?branch=master" alt="Travis Build Status">
+	</a>
+	<a href="https://circleci.com/gh/laraeast/laravel-sluggable">
+		<img src="https://circleci.com/gh/laraeast/laravel-sluggable.png?style=shield" alt="Circleci Build Status">
+	</a>
+	<a href="https://packagist.org/packages/laraeast/laravel-sluggable">
+		<img src="https://poser.pugx.org/laraeast/laravel-sluggable/d/total.svg" alt="Total Downloads">
+	</a>
+	<a href="https://packagist.org/packages/laraeast/laravel-sluggable">
+		<img src="https://poser.pugx.org/laraeast/laravel-sluggable/v/stable.svg" alt="Latest Stable Version">
+	</a>
+	<a href="https://packagist.org/packages/laraeast/laravel-sluggable">
+		<img src="https://poser.pugx.org/laraeast/laravel-sluggable/license.svg" alt="License">
+	</a>
+</p>
 Easy creation of slugs for your Eloquent models in Laravel.
 
 ## Background: What is a slug?
