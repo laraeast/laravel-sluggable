@@ -1,0 +1,36 @@
+{
+    "name": "laraeast/laravel-sluggable",
+    "description": "Easy creation of slugs for your Eloquent models in Laravel",
+    "type": "package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ahmed Fathy",
+            "email": "aliraqi.dev@gmail.com"
+        }
+    ],
+    "require": {
+        "laravel/framework": "5.*"
+    },
+    "require-dev": {
+        "orchestra/testbench": "~3.0",
+        "mockery/mockery": "^1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Laraeast\\LaravelSluggable\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Laraeast\\LaravelSluggable\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Laraeast\\LaravelSluggable\\ServiceProvider"
+            ]
+        }
+    }
+}
