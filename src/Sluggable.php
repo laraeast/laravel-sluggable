@@ -62,7 +62,7 @@ trait Sluggable
         $input = trim($input);
 
         // Minimize characters and remove spaces and punctuation.
-        $return = trim(preg_replace('/ +/', ' ', preg_replace('/[^a-zA-Z\p{Arabic}0-9\s]/u', '', mb_strtolower($input))));
+        $return = trim(preg_replace('/ +/', ' ', preg_replace('/[^a-zA-Z\p{Arabic}0-9\s]/u', ' ', mb_strtolower($input))));
 
         // Replace space.
         $slug = str_replace(' ', $separator, $return);
