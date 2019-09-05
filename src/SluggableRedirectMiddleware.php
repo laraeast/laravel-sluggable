@@ -10,8 +10,9 @@ class SluggableRedirectMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -27,7 +28,7 @@ class SluggableRedirectMiddleware
                 }
             }
         }
-        if (! empty($newParameters)) {
+        if (!empty($newParameters)) {
             return redirect()->route(
                 $request->route()->getName(),
                 $newParameters

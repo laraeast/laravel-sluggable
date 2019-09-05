@@ -19,7 +19,8 @@ trait Sluggable
     /**
      * Retrieve the model for a bound value.
      *
-     * @param  mixed  $value
+     * @param mixed $value
+     *
      * @return \Illuminate\Database\Eloquent\Model|null
      */
     public function resolveRouteBinding($value)
@@ -34,7 +35,7 @@ trait Sluggable
      *
      * @return array
      */
-    public abstract function sluggableFields();
+    abstract public function sluggableFields();
 
     /**
      * Take the title of the entry.
@@ -71,7 +72,8 @@ trait Sluggable
     }
 
     /**
-     * Get the sluggable separator
+     * Get the sluggable separator.
+     *
      * @return string
      */
     protected function getSeparator()

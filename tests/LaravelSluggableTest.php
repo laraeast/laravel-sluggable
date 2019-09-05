@@ -3,9 +3,9 @@
 namespace Laraeast\LaravelSluggable\Tests;
 
 use Illuminate\Support\Facades\Route;
+use Laraeast\LaravelSluggable\ServiceProvider;
 use Laraeast\LaravelSluggable\SluggableRedirectMiddleware;
 use Orchestra\Testbench\TestCase;
-use Laraeast\LaravelSluggable\ServiceProvider;
 
 class LaravelSluggableTest extends TestCase
 {
@@ -22,9 +22,10 @@ class LaravelSluggableTest extends TestCase
     }
 
     /**
-     * Load package service provider
+     * Load package service provider.
      *
-     * @param  \Illuminate\Foundation\Application $app
+     * @param \Illuminate\Foundation\Application $app
+     *
      * @return array
      */
     protected function getPackageProviders($app)
@@ -35,7 +36,8 @@ class LaravelSluggableTest extends TestCase
     /**
      * Define environment setup.
      *
-     * @param  \Illuminate\Foundation\Application $app
+     * @param \Illuminate\Foundation\Application $app
+     *
      * @return void
      */
     protected function getEnvironmentSetUp($app)
@@ -43,9 +45,9 @@ class LaravelSluggableTest extends TestCase
         // Setup default database to use sqlite :memory:
         $app['config']->set('database.default', 'testbench');
         $app['config']->set('database.connections.testbench', [
-            'driver' => 'sqlite',
+            'driver'   => 'sqlite',
             'database' => ':memory:',
-            'prefix' => '',
+            'prefix'   => '',
         ]);
 
         $app['config']->set('app.key', 'base64:DqoQnm5jcBekszwTnhkgn30vCbCeXKecqMmFNftB1TU=');
@@ -55,12 +57,12 @@ class LaravelSluggableTest extends TestCase
     public function it_returns_post_slug_url_when_use_route_method()
     {
         Route::get('posts/{post}', function (Post $post) {
-           return $post->title;
+            return $post->title;
         })->name('posts.show');
 
         $post = Post::create([
             'title' => 'dummy title',
-            'body' => 'dummy body',
+            'body'  => 'dummy body',
         ]);
 
         $this->assertEquals(route('posts.show', $post), url("posts/{$post->id}-dummy-title"));
@@ -74,12 +76,12 @@ class LaravelSluggableTest extends TestCase
     public function it_redirect_to_latest_updated_slug()
     {
         Route::middleware(['web', SluggableRedirectMiddleware::class])->get('posts/{post}', function (Post $post) {
-           return request()->fullUrl();
+            return request()->fullUrl();
         })->name('posts.show');
 
         $post = Post::create([
             'title' => 'dummy title',
-            'body' => 'dummy body',
+            'body'  => 'dummy body',
         ]);
 
         $this->get(url("posts/{$post->id}"))
@@ -90,7 +92,6 @@ class LaravelSluggableTest extends TestCase
 
         $post->update(['title' => 'new title']);
         $this->assertEquals(route('posts.show', $post), url("posts/{$post->id}-new-title"));
-
 
         $this->get(url("posts/{$post->id}-dummy-title"))
             ->assertRedirect(url("posts/{$post->id}-new-title"));
