@@ -19,7 +19,7 @@ trait Sluggable
     /**
      * Retrieve the model for a bound value.
      *
-     * @param mixed $value
+     * @param mixed       $value
      * @param string|null $field
      *
      * @return \Illuminate\Database\Eloquent\Model|null
@@ -66,8 +66,13 @@ trait Sluggable
         // Minimize characters and remove spaces and punctuation.
         $return = trim(
             preg_replace(
-                '/ +/', ' ',
-                preg_replace('/[^a-zA-Z\p{Arabic}0-9\s]/u', ' ', mb_strtolower($input))
+                '/ +/',
+                ' ',
+                preg_replace(
+                    '/[^a-zA-Z\p{Arabic}0-9\s]/u',
+                    ' ',
+                    mb_strtolower($input)
+                )
             )
         );
 
