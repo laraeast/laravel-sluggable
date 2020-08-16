@@ -42,10 +42,14 @@ http://example.com/post/1-my-dinner-with-ahmed-omar
 ## Installation
 
 * Install the package via Composer:
-
-    ```sh
-    $ composer require laraeast/laravel-sluggable
-    ```
+    - For Laravel 5.2 >= 6.x
+        ```bash
+        $ composer require laraeast/laravel-sluggable:^1.0
+        ```
+    - For Laravel 7.x
+        ```bash
+        $ composer require laraeast/laravel-sluggable:^2.0
+        ```
 
     The package will automatically register its service provider.
 
